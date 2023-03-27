@@ -2,7 +2,6 @@
 
 # this is a bash script meant to build the programs dependencies. Will work on Darwin, Unix/Linux and Windows with WSL enabled.
 # This function runs first. Once it grabs local authenticatiion the it will run an update/upgrade + program build
-
 ## ADDON  : THIS OROGRAM WILL FETCH THE LOCAL IP / BROADCAST INFORMATION -- IT WILL ALSO RELAY A [func] SSH TUNNEL (SSHTunnel)
 
 function Authentication() {
@@ -86,6 +85,5 @@ function IsComplete() {
 }
 
 Authentication
-
 IsComplete ## IS COMPLETE WILL RUN IF SUDO AUTHENTICATION IS LEVIED. IF THE USER CANNOT AUTHENTICATE, THE BASH SCRIPT WILL EXIT
 

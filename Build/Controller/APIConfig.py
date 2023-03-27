@@ -8,17 +8,18 @@ import base64
 # BE SURE TO RUN THE CONFIG FILE BEFORE RUNNING THE FILE.
 # TO BUILD COMMUNCIATION BETWEEN END USER AND API
 # build notes:
+## BE SURE TO RUN THE BUID CONFIG API.SH
+# pip install requests
+# get fresh token from shareholder to run live test 
 
-#pip install requests
 
 
-
-class FetchAPI ():
+class APConfig():
 
     def __init__(self, apiURL):
 
         self.TOKEN = "90565ed6e9c84dbea4144de09bd35a93" # SAMPLE GIVEN FROM API DOC
-
+        self.USER = "TEMP_USERNAME"
         ## ENTER API INFO HERE
         self.parameters = {
             "Anthorization": self.TOKEN,
@@ -32,6 +33,18 @@ class FetchAPI ():
 
         print(f"[TEXT] Printing Res  \n {text}")
 
+
+    def RunRequest(self):
+
+        s = requests.Session()
+        personalLogin = (self.USER, self.TOKEN)
+        s.headers.update({'x-test': 'true'})
+
+
+        # both 'x-test' and 'x-test2' are sent
+        s.get('http://httpbin.org/headers', headers={'x-test2': 'true'})
+
+        print(f"[!] {s.auth}")
 
     def fetchAPI(self, url):
         print(f"[!] running fetch api for {url}")
@@ -50,6 +63,7 @@ class FetchAPI ():
 
         if r.status_code == 200:
             print(f"[STATUS-CODE] {r.status_code}, proceeding")
+            self.RunRequest()
             self.printRes(r.json())
 
         else:
@@ -68,7 +82,6 @@ class FetchAPI ():
 
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/todos/1"
-    run = FetchAPI(url)
+    run = APConfig(url)
     run.fetchAPI(url)
-
 
